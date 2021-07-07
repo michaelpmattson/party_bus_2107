@@ -48,4 +48,53 @@ describe Bus do
       expect(bus.yell_at_passengers).to eq(['MIKE', 'MEGAN', 'TIM'])
     end
   end
+
+
+  # Iteration 3
+  context 'Capacity' do
+    it 'returns 3 when there are 3 passengers' do
+      bus = Bus.new('Mikes Awesome Bus', 4)
+
+      bus.add_passenger('Mike')
+      bus.add_passenger('Megan')
+      bus.add_passenger('Tim')
+
+      expect(bus.number_of_passengers).to eq(3)
+    end
+
+    it 'returns false when not over capacity' do
+      bus = Bus.new('Mikes Awesome Bus', 4)
+
+      bus.add_passenger('Mike')
+      bus.add_passenger('Megan')
+      bus.add_passenger('Tim')
+
+      expect(bus.over_capacity?).to be(false)
+    end
+
+    # This is kind of the same test as above, only included for posterity.
+    it 'returns 5 when there are 5 passengers' do
+      bus = Bus.new('Mikes Awesome Bus', 4)
+
+      bus.add_passenger('Mike')
+      bus.add_passenger('Megan')
+      bus.add_passenger('Tim')
+      bus.add_passenger('Eve')
+      bus.add_passenger('Alice')
+
+      expect(bus.number_of_passengers).to eq(5)
+    end
+
+    it 'returns true when over capacity' do
+      bus = Bus.new('Mikes Awesome Bus', 4)
+
+      bus.add_passenger('Mike')
+      bus.add_passenger('Megan')
+      bus.add_passenger('Tim')
+      bus.add_passenger('Eve')
+      bus.add_passenger('Alice')
+
+      expect(bus.over_capacity?).to be(true)
+    end
+  end
 end

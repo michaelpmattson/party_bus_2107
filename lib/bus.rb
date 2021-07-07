@@ -14,4 +14,14 @@ class Bus
   def yell_at_passengers
     @passengers.map { |passenger| passenger.upcase }
   end
+
+  def number_of_passengers
+    @passengers.count
+  end
+
+  def over_capacity?
+    return true if number_of_passengers > 4
+
+    false
+  end
 end
