@@ -49,7 +49,6 @@ describe Bus do
     end
   end
 
-
   # Iteration 3
   context 'Capacity' do
     it 'returns 3 when there are 3 passengers' do
@@ -95,6 +94,41 @@ describe Bus do
       bus.add_passenger('Alice')
 
       expect(bus.over_capacity?).to be(true)
+    end
+  end
+
+  # Iteration 4
+  context 'Kicking out' do
+    it 'kicks out one passenger' do
+      bus = Bus.new('Mikes Awesome Bus', 4)
+
+      bus.add_passenger('Mike')
+      bus.add_passenger('Megan')
+      bus.add_passenger('Tim')
+      bus.add_passenger('James')
+      bus.add_passenger('Cat')
+      bus.add_passenger('Alice')
+
+      bus.kick_out
+
+      expect(bus.number_of_passengers).to eq(5)
+    end
+
+    it 'kicks out the passengers who have been on longest' do
+      bus = Bus.new('Mikes Awesome Bus', 4)
+
+      bus.add_passenger('Mike')
+      bus.add_passenger('Megan')
+      bus.add_passenger('Tim')
+      bus.add_passenger('James')
+      bus.add_passenger('Cat')
+      bus.add_passenger('Alice')
+
+      bus.kick_out
+      bus.kick_out
+      bus.kick_out
+
+      expect(bus.passengers).to eq(["James", "Cat", "Alice"])
     end
   end
 end
