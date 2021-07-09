@@ -20,9 +20,7 @@ class Bus
   end
 
   def over_capacity?
-    return true if number_of_passengers > 4
-
-    false
+    number_of_passengers > 4
   end
 
   def kick_out

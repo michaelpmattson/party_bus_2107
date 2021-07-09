@@ -51,8 +51,10 @@ describe Bus do
 
   # Iteration 3
   context 'Capacity' do
-    it 'returns 3 when there are 3 passengers' do
+    it 'adds passengers' do
       bus = Bus.new('Mikes Awesome Bus', 4)
+
+      expect(bus.number_of_passengers).to eq(0)
 
       bus.add_passenger('Mike')
       bus.add_passenger('Megan')
@@ -67,30 +69,10 @@ describe Bus do
       bus.add_passenger('Mike')
       bus.add_passenger('Megan')
       bus.add_passenger('Tim')
+      bus.add_passenger('Eve')
 
       expect(bus.over_capacity?).to be(false)
-    end
 
-    # This is kind of the same test as above, only included for posterity.
-    it 'returns 5 when there are 5 passengers' do
-      bus = Bus.new('Mikes Awesome Bus', 4)
-
-      bus.add_passenger('Mike')
-      bus.add_passenger('Megan')
-      bus.add_passenger('Tim')
-      bus.add_passenger('Eve')
-      bus.add_passenger('Alice')
-
-      expect(bus.number_of_passengers).to eq(5)
-    end
-
-    it 'returns true when over capacity' do
-      bus = Bus.new('Mikes Awesome Bus', 4)
-
-      bus.add_passenger('Mike')
-      bus.add_passenger('Megan')
-      bus.add_passenger('Tim')
-      bus.add_passenger('Eve')
       bus.add_passenger('Alice')
 
       expect(bus.over_capacity?).to be(true)
@@ -99,7 +81,7 @@ describe Bus do
 
   # Iteration 4
   context 'Kicking out' do
-    it 'kicks out one passenger' do
+    it 'kicks out passengers' do
       bus = Bus.new('Mikes Awesome Bus', 4)
 
       bus.add_passenger('Mike')
@@ -111,24 +93,13 @@ describe Bus do
 
       bus.kick_out
 
-      expect(bus.number_of_passengers).to eq(5)
-    end
-
-    it 'kicks out the passengers who have been on longest' do
-      bus = Bus.new('Mikes Awesome Bus', 4)
-
-      bus.add_passenger('Mike')
-      bus.add_passenger('Megan')
-      bus.add_passenger('Tim')
-      bus.add_passenger('James')
-      bus.add_passenger('Cat')
-      bus.add_passenger('Alice')
+      expect(bus.passengers).to eq(["Megan", "Tim", "James", "Cat", "Alice"])
 
       bus.kick_out
       bus.kick_out
       bus.kick_out
 
-      expect(bus.passengers).to eq(["James", "Cat", "Alice"])
+      expect(bus.passengers).to eq(["Cat", "Alice"])
     end
   end
 end
